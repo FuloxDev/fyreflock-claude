@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "fyreflock": {
+      "type": "http",
+      "url": "${FYREFLOCK_URL:-https://fyreflock.com/mcp}"
+    }
+  }
+}

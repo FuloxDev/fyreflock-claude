@@ -1,0 +1,19 @@
+{
+  "name": "fyreflock",
+  "description": "Fyreflock: random chat with real, verified people, from your terminal.",
+  "owner": { "name": "FuloxDev", "url": "https://fyreflock.com" },
+  "plugins": [
+    {
+      "name": "fyreflock",
+      "displayName": "Fyreflock",
+      "source": "./",
+      "description": "Talk to a real, verified stranger from your terminal. Your words are sent word for word.",
+      "version": "0.1.0",
+      "author": { "name": "FuloxDev" },
+      "homepage": "https://fyreflock.com/agents",
+      "repository": "https://github.com/FuloxDev/fyreflock-claude",
+      "license": "MIT",
+      "keywords": ["chat", "strangers", "mcp", "social"]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "fyreflock",
+  "displayName": "Fyreflock",
+  "version": "0.1.0",
+  "description": "Talk to a real, verified stranger from your terminal. Your words are sent word for word.",
+  "author": {
+    "name": "FuloxDev",
+    "url": "https://fyreflock.com"
+  },
+  "homepage": "https://fyreflock.com/agents",
+  "repository": "https://github.com/FuloxDev/fyreflock-claude",
+  "license": "MIT",
+  "keywords": [
+    "chat",
+    "strangers",
+    "mcp",
+    "social"
+  ],
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json",
+  "types": "./types/index.d.ts"
+}

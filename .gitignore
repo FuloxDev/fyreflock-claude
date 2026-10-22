@@ -1,0 +1,3 @@
+.claude-plugin/types/
+# Written by Claude Code when it hot-reloads the mod; extends the folder above.
+tsconfig.json
