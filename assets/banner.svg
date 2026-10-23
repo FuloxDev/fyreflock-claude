@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 420" width="1280" height="420" role="img" aria-label="Fyreflock: a real person, right inside your AI chat">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c1535"/>
+      <stop offset="1" stop-color="#0e0b1c"/>
+    </linearGradient>
+    <radialGradient id="ember" cx="0.5" cy="1" r="0.75">
+      <stop offset="0" stop-color="#ff8a6b" stop-opacity="0.42"/>
+      <stop offset="0.55" stop-color="#ee4a5e" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#ee4a5e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="moon" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff7de" stop-opacity="0.55"/>
+      <stop offset="0.45" stop-color="#fff7de" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#fff7de" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="spark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF8A6B"/>
+      <stop offset="1" stop-color="#EE4A5E"/>
+    </linearGradient>
+    <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a1f4a"/>
+      <stop offset="1" stop-color="#160f2b"/>
+    </linearGradient>
+    <clipPath id="round"><rect width="1280" height="420" rx="28"/></clipPath>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter>
+  </defs>
+
+  <g clip-path="url(#round)">
+    <rect width="1280" height="420" fill="url(#sky)"/>
+
+    <!-- stars -->
+    <g fill="#fff7de">
+      <circle cx="92" cy="58" r="1.6" opacity="0.8"/><circle cx="188" cy="112" r="1.1" opacity="0.5"/><circle cx="256" cy="40" r="1.4" opacity="0.7"/>
+      <circle cx="402" cy="74" r="1.2" opacity="0.55"/><circle cx="486" cy="30" r="1.8" opacity="0.85"/><circle cx="552" cy="128" r="1" opacity="0.45"/>
+      <circle cx="640" cy="52" r="1.5" opacity="0.7"/><circle cx="724" cy="96" r="1.1" opacity="0.5"/><circle cx="812" cy="34" r="1.7" opacity="0.8"/>
+      <circle cx="930" cy="70" r="1.2" opacity="0.6"/><circle cx="1012" cy="26" r="1.5" opacity="0.75"/><circle cx="1110" cy="88" r="1" opacity="0.5"/>
+      <circle cx="1188" cy="46" r="1.6" opacity="0.8"/><circle cx="1236" cy="140" r="1.1" opacity="0.5"/><circle cx="340" cy="150" r="1" opacity="0.4"/>
+      <circle cx="60" cy="190" r="1.2" opacity="0.5"/><circle cx="1150" cy="200" r="1.3" opacity="0.55"/><circle cx="880" cy="150" r="1" opacity="0.45"/>
+    </g>
+
+    <!-- moon -->
+    <circle cx="660" cy="64" r="110" fill="url(#moon)"/>
+    <circle cx="660" cy="64" r="26" fill="#fff7de"/>
+
+    <!-- hills and the ember glow of the fire below the frame -->
+    <path d="M0 350 C 220 300, 420 330, 640 318 C 860 306, 1060 340, 1280 300 L1280 420 L0 420 Z" fill="url(#hill)"/>
+    <rect y="200" width="1280" height="220" fill="url(#ember)"/>
+    <ellipse cx="640" cy="432" rx="260" ry="60" fill="#ff8a6b" opacity="0.35" filter="url(#soft)"/>
+
+    <!-- wordmark -->
+    <g transform="translate(72 92)">
+      <g transform="scale(0.72)">
+        <rect width="100" height="100" rx="22" fill="url(#spark)"/>
+        <g transform="translate(-6.8 16.2) scale(3.9)">
+          <path fill="#FFF7DE" d="M12 2c1 4 5 5.5 5 11a5 5 0 0 1-10 0c0-2.2 1-3.6 2.2-5 .3 1.6 1 2.5 2.3 3 .3-3.2-.5-6 .5-9z"/>
+          <path fill="#FFC53D" d="M12 10c.6 2 2.6 3 2.6 5.3A2.6 2.6 0 0 1 9.4 15c0-1.6 1.4-2.3 1.7-4 .2.8.5 1.3 1 1.6-.1-1.3-.4-2-.1-2.6z"/>
+        </g>
+        <g fill="#FFF7DE">
+          <path transform="translate(59 31)" d="M-10 -1C-6 -7 -2 -6 0 0C2 -6 6 -7 10 -1C6 -3.5 3 -2.5 0 4.5C-3 -2.5 -6 -3.5 -10 -1Z"/>
+          <path transform="translate(70 22) scale(.8)" d="M-10 -1C-6 -7 -2 -6 0 0C2 -6 6 -7 10 -1C6 -3.5 3 -2.5 0 4.5C-3 -2.5 -6 -3.5 -10 -1Z"/>
+          <path transform="translate(79 14.5) scale(.6)" d="M-10 -1C-6 -7 -2 -6 0 0C2 -6 6 -7 10 -1C6 -3.5 3 -2.5 0 4.5C-3 -2.5 -6 -3.5 -10 -1Z"/>
+        </g>
+      </g>
+      <text x="92" y="52" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="44" font-weight="800" letter-spacing="-1">
+        <tspan fill="#FF7A72">Fyre</tspan><tspan fill="#FFF7DE">flock</tspan>
+      </text>
+    </g>
+
+    <text font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="50" font-weight="800" fill="#FFF7DE" letter-spacing="-1">
+      <tspan x="72" y="222">A real person,</tspan>
+      <tspan x="72" y="278">right inside your AI chat.</tspan>
+    </text>
+    <text font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="20" fill="#CFC6E8">
+      <tspan x="72" y="318">Ask Claude, ChatGPT or Claude Code to find you someone.</tspan>
+      <tspan x="72" y="345">A verified stranger texts back in the same window.</tspan>
+    </text>
+    <text x="72" y="388" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#FFC53D" letter-spacing="2">
+      VERIFIED PEOPLE ONLY  ·  NO BOTS  ·  18+
+    </text>
+
+    <!-- the box, drawn: a stranger mid-sentence -->
+    <g transform="translate(868 66)">
+      <rect width="348" height="238" rx="18" fill="#262038" stroke="#3b3258"/>
+      <rect x="1" y="1" width="346" height="46" rx="17" fill="#2c2543"/>
+      <circle cx="30" cy="24" r="14" fill="#5b7cff"/>
+      <text x="30" y="29" text-anchor="middle" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="800" fill="#fff">Q</text>
+      <text x="54" y="22" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="800" fill="#FFF7DE">@quietheron</text>
+      <text x="54" y="38" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#A89FC4">Verified · Relayed by Fyreflock</text>
+      <circle cx="322" cy="24" r="5" fill="#34d399"/>
+
+      <rect x="16" y="64" width="236" height="34" rx="12" fill="#3a3150"/>
+      <text x="30" y="86" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#FFF7DE">wait, you stayed back for the break too?</text>
+
+      <rect x="160" y="108" width="172" height="34" rx="12" fill="#FFC53D"/>
+      <text x="174" y="130" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#2b2118">yeah hostel's empty lol</text>
+
+      <rect x="16" y="152" width="214" height="34" rx="12" fill="#3a3150"/>
+      <text x="30" y="174" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#FFF7DE">same. ok what are you studying</text>
+
+      <rect x="16" y="196" width="58" height="28" rx="12" fill="#3a3150"/>
+      <circle cx="33" cy="210" r="3.5" fill="#CFC6E8"/><circle cx="45" cy="210" r="3.5" fill="#CFC6E8" opacity="0.7"/><circle cx="57" cy="210" r="3.5" fill="#CFC6E8" opacity="0.4"/>
+    </g>
+  </g>
+</svg>
