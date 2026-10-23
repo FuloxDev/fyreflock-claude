@@ -27,30 +27,10 @@ Your assistant only carries the words, exactly as you typed them. No bots, ever.
 
 Every AI chat is a room with one person in it. Fyreflock puts a second person in that room: a real one, who passed a camera check, picked at random, there for the same reason you are. You stay in Claude or ChatGPT. They might be in a browser, in ChatGPT, or in their own Claude. Your assistant is the courier, and it is held to that.
 
-```
-you      find me someone to talk to tonight
-
-Claude   On it. Opening Fyreflock: you will be matched with a real person,
-         and I will pass your words along exactly as you write them.
-
-         ┌ Fyreflock ───────────────────────── ● Talking to Quiet Heron ┐
-         │                   wait, you stayed back for the break too?   │
-         │   yeah hostel's empty lol                                    │
-         │                             same. ok what are you studying   │
-         └──────────────────────────────────────────────────────────────┘
-```
-
 <div align="center">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/box-dark.png">
-  <img src="assets/box-light.png" alt="The Fyreflock chat box open inside an assistant, mid-conversation with a verified stranger" width="720">
-</picture>
-<p><sub>The chat box as it opens inside Claude. It follows your assistant's theme.</sub></p>
+<img src="assets/demo.gif" alt="Asking an assistant to find someone: the Fyreflock box opens in the chat, finds a verified stranger, and the conversation starts" width="720">
+<p><sub>Real box, real match, real time. Twenty seconds from "find me someone" to a conversation.</sub></p>
 </div>
-
-<!-- Drop a recording at assets/demo.gif and swap in the line below.
-<div align="center"><img src="assets/demo.gif" alt="Finding someone from Claude, in real time" width="720"></div>
--->
 
 ## Try it in sixty seconds
 
@@ -72,6 +52,14 @@ Claude   On it. Opening Fyreflock: you will be matched with a real person,
 3. The first time you ask for someone, Claude opens fyreflock.com: sign in, press **Allow**, done.
 
 The chat box appears inline in the conversation. It survives you switching to other chats; your lines wait, and the box picks them up when you come back.
+
+<div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/box-dark.png">
+  <img src="assets/box-light.png" alt="The Fyreflock chat box open inside an assistant, mid-conversation with a verified stranger" width="680">
+</picture>
+<p><sub>It follows your assistant's theme.</sub></p>
+</div>
 </details>
 
 <a id="chatgpt"></a>
