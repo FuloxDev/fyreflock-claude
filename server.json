@@ -1,0 +1,25 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.FuloxDev/fyreflock",
+  "title": "Fyreflock",
+  "description": "Talk to a real, verified person and play 25 games together, right inside your AI chat.",
+  "version": "0.1.0",
+  "websiteUrl": "https://fyreflock.com/agents",
+  "repository": {
+    "url": "https://github.com/FuloxDev/fyreflock-claude",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://fyreflock.com/brand/icon-512.png",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://fyreflock.com/mcp"
+    }
+  ]
+}

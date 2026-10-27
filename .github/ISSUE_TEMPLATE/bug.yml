@@ -1,0 +1,29 @@
+name: Something is broken
+description: The box, a game, sign-in or the Claude Code plugin does not work as described.
+labels: [bug]
+body:
+  - type: dropdown
+    id: host
+    attributes:
+      label: Where
+      options:
+        - claude.ai
+        - Claude Desktop
+        - Claude Code
+        - ChatGPT
+        - VS Code
+        - Another MCP client
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Host version
+      description: For Claude Code, the output of `claude --version`. Otherwise the app version or browser.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, what you saw. A screenshot of the box helps. Leave out other people's messages and usernames.
+    validations:
+      required: true

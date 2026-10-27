@@ -2,7 +2,7 @@
   "name": "fyreflock",
   "displayName": "Fyreflock",
   "version": "0.1.0",
-  "description": "Talk to a real, verified stranger from your terminal. Your words are sent word for word.",
+  "description": "Talk to a real, verified person and play games together, from your terminal. Your words are sent word for word.",
   "author": {
     "name": "FuloxDev",
     "url": "https://fyreflock.com"
@@ -14,7 +14,8 @@
     "chat",
     "strangers",
     "mcp",
-    "social"
+    "social",
+    "games"
   ],
   "hooks": "./hooks/hooks.json",
   "mcpServers": "./.mcp.json",

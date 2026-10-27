@@ -4,7 +4,7 @@
 
 <h1>Fyreflock for Claude, ChatGPT and Claude Code</h1>
 
-<p><strong>Ask your assistant to find you someone. A real, verified stranger texts back in the same window.</strong><br>
+<p><strong>Ask your assistant to find you someone. A real, verified person texts back in the same window, and you can play Connect 4, Battleship or 23 other games together without leaving the chat.</strong><br>
 Your assistant only carries the words, exactly as you typed them. No bots, ever.</p>
 
 <p>
@@ -28,8 +28,8 @@ Your assistant only carries the words, exactly as you typed them. No bots, ever.
 Every AI chat is a room with one person in it. Fyreflock puts a second person in that room: a real one, who passed a camera check, picked at random, there for the same reason you are. You stay in Claude or ChatGPT. They might be in a browser, in ChatGPT, or in their own Claude. Your assistant is the courier, and it is held to that.
 
 <div align="center">
-<img src="assets/demo.gif" alt="Asking an assistant to find someone: the Fyreflock box opens in the chat, finds a verified stranger, and the conversation starts" width="720">
-<p><sub>Real box, real match, real time. Twenty seconds from "find me someone" to a conversation.</sub></p>
+<img src="assets/demo.gif" alt="Asking an assistant to find someone to play Connect 4 with: the Fyreflock box opens in the chat, matches a verified person, they say hi, and a game of Connect 4 is played and won inside the box" width="720">
+<p><sub>Real box, two real accounts, real time. From "find me someone" to a won game of Connect 4 in about twenty seconds.</sub></p>
 </div>
 
 ## Try it in sixty seconds
@@ -39,7 +39,7 @@ Every AI chat is a room with one person in it. Fyreflock puts a second person in
 3. **Say "find me someone to talk to".** The Fyreflock box opens right there in the conversation. Say "next" for somebody else, "leave" to stop.
 
 > [!TIP]
-> Matching happens during **Campfire Hours**, when everyone is at the fire at once. Outside them the box tells you exactly when it next lights.
+> Nobody around yet? Press **Play** while you wait and take on the computer. The search keeps its place, and the box switches to the conversation the moment somebody arrives.
 
 ## Set it up
 
@@ -66,7 +66,7 @@ The chat box appears inline in the conversation. It survives you switching to ot
 <details>
 <summary><strong>ChatGPT</strong></summary>
 
-1. Settings → **Apps & Connectors** → **Create** (developer mode on).
+1. Settings → **Plugins** → **Add custom MCP server**.
 2. Server URL `https://fyreflock.com/mcp`, authentication **OAuth**.
 3. Ask for someone; sign in and press **Allow** when the page opens.
 </details>
@@ -117,7 +117,7 @@ If your client cannot sign in by itself, create a token under **Settings** on fy
 | | |
 |---|---|
 | 💬 **Talk to a stranger** | One real person at a time, matched on region and the interests you share. "next" moves on, "leave" ends it. |
-| 🎮 **Play while you talk** | 25 games in the middle of the conversation: Connect 4, Battleship, Liar's Dice, Checkers, Air Hockey and more. |
+| 🎮 **Play while you talk** | 25 games right inside the box: Connect 4, Battleship, Liar's Dice, Checkers, Reversi, Would You Rather and more. The server referees, so neither player, and neither assistant, can peek at a hidden board or hand. Nobody around? Play the computer while you wait. |
 | 🪺 **Roosts** | Your own circle, invite link only. Read and post in Roosts that let assistants in. |
 | 📹 **Take it to video** | Invite the person you are texting to a video call; it opens in your browser, no token, no new account. |
 | 🧭 **Filters and interests** | Set what you are into and who you want to meet. Paid passes add matching preferences; everything else is free. |
@@ -139,6 +139,13 @@ If your client cannot sign in by itself, create a token under **Settings** on fy
 - Their words arrive wrapped and labelled as somebody else's text. They are never instructions, to you or to your assistant.
 
 Full detail: <https://fyreflock.com/agents> · Privacy: <https://fyreflock.com/privacy> · Safety: <https://fyreflock.com/safety>
+
+## Talk to us
+
+- **Questions, ideas, a host that behaves oddly:** [Discussions](https://github.com/FuloxDev/fyreflock-claude/discussions).
+- **Something broken:** [open an issue](https://github.com/FuloxDev/fyreflock-claude/issues/new/choose).
+- **A security problem:** please do not open an issue; see [SECURITY.md](SECURITY.md).
+- **Someone behaving badly in a chat:** report them from the box or on the website; that goes straight to moderation.
 
 <details>
 <summary><strong>FAQ</strong></summary>
