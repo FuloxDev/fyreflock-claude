@@ -6,6 +6,3 @@ contact_links:
   - name: Report a person
     url: https://fyreflock.com/safety
     about: Someone behaving badly in a chat. Report them from the box or the website; this repository is not watched by moderation.
-  - name: Security problem
-    url: https://github.com/FuloxDev/fyreflock-claude/security/advisories/new
-    about: Report it privately, never as an issue.
