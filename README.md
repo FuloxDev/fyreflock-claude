@@ -31,7 +31,7 @@ Every AI chat is a room with one person in it. Fyreflock puts a second person in
 
 <div align="center">
 <img src="assets/demo.gif" alt="Asking an assistant to find someone to play Connect 4 with: the Fyreflock box opens in the chat, matches a verified person, they say hi, and a game of Connect 4 is played and won inside the box" width="720">
-<p><sub>Real box, two real accounts, real time. From "find me someone" to a won game of Connect 4 in about twenty seconds.</sub></p>
+<p><sub>Real box, two real accounts, real time. From "find me someone" to a won game of Connect 4 in about fifteen seconds.</sub></p>
 </div>
 
 ## Try it in sixty seconds
