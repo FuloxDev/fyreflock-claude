@@ -540,7 +540,7 @@ export const register: Register = (on) => {
           </Box>
           <Text dimColor>{meta}</Text>
         </Box>
-        {mood === 'matched' && <Text dimColor>{`Verified · ${v.viaAgent ? 'reads through an assistant' : 'Relayed by Fyreflock'}`}</Text>}
+        {mood === 'matched' && <Text dimColor>{`Camera checked · ${v.viaAgent ? 'reads through an assistant' : 'Relayed by Fyreflock'}`}</Text>}
         {mood === 'reconnecting' && <Text color="claude">Reconnecting…</Text>}
         {/* The widget's glow, as a rule under the header in the state's colour. */}
         <Text color={MOOD[mood]}>{'─'.repeat(e.props.bodyColumns)}</Text>
@@ -560,7 +560,7 @@ export const register: Register = (on) => {
         )}
         {mood === 'off' && !v.link && (
           <Box flexDirection="column" gap={1}>
-            <Text wrap="wrap">Sign in to talk one to one with a real, verified person.</Text>
+            <Text wrap="wrap">Sign in to talk one to one with a real person.</Text>
             <Box>
               <Button key="signin" hotkey="s" variant="primary" onPress={() => void signIn($)}>
                 Sign in
@@ -569,7 +569,7 @@ export const register: Register = (on) => {
           </Box>
         )}
         {mood === 'idle' && <Text bold>Find your flock</Text>}
-        {mood === 'idle' && <Text wrap="wrap">Talk one to one with a real, verified person. No bots, and you can leave whenever you like.</Text>}
+        {mood === 'idle' && <Text wrap="wrap">Talk one to one with a real person who passed a live camera check. No bots, and you can leave whenever you like.</Text>}
         {mood === 'searching' && <Text bold>Finding someone for you</Text>}
         {/* The searcher is in the queue too, so the others are one fewer. */}
         {mood === 'searching' && <Text dimColor>{`Matching on anything${around === null ? '' : ` · ${Math.max(0, around - 1)} others looking`}`}</Text>}

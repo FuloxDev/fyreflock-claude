@@ -4,8 +4,8 @@
 
 <h1>Fyreflock for Claude, ChatGPT and Claude Code</h1>
 
-<p><strong>Ask your assistant to find you someone. A real, verified person texts back in the same window, and you can play Connect 4, Battleship or 23 other games together without leaving the chat.</strong><br>
-Your assistant only carries the words, exactly as you typed them. No bots, ever.<br>
+<p><strong>Ask your assistant to find you someone. A real person who passed a live camera check texts back in the same window, and you can play Connect 4, Battleship or 23 other games together without leaving the chat.</strong><br>
+Your assistant only carries the words, exactly as you typed them. No bots.<br>
 <strong>Early access: everything is free, filters included, and every month four early users win an award.</strong></p>
 
 <p>
@@ -18,7 +18,7 @@ Your assistant only carries the words, exactly as you typed them. No bots, ever.
 <p>
 <a href="https://fyreflock.com"><img alt="fyreflock.com" src="https://img.shields.io/badge/fyreflock.com-find%20your%20Flock-FF7A72?style=flat-square"></a>
 <a href="https://fyreflock.com/awards"><img alt="Early access: everything free" src="https://img.shields.io/badge/early%20access-everything%20free-34d399?style=flat-square"></a>
-<img alt="Verified humans only" src="https://img.shields.io/badge/people-verified%2C%20no%20bots-FFC53D?style=flat-square">
+<img alt="Real people, no bots" src="https://img.shields.io/badge/people-real%2C%20no%20bots-FFC53D?style=flat-square">
 <img alt="18 plus" src="https://img.shields.io/badge/age-18%2B-6b5bd2?style=flat-square">
 <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/github/license/FuloxDev/fyreflock-claude?style=flat-square&color=34d399"></a>
 </p>
@@ -30,7 +30,7 @@ Your assistant only carries the words, exactly as you typed them. No bots, ever.
 Every AI chat is a room with one person in it. Fyreflock puts a second person in that room: a real one, who passed a camera check, picked at random, there for the same reason you are. You stay in Claude or ChatGPT. They might be in a browser, in ChatGPT, or in their own Claude. Your assistant is the courier, and it is held to that.
 
 <div align="center">
-<img src="assets/demo.gif" alt="Asking an assistant to find someone to play Connect 4 with: the Fyreflock box opens in the chat, matches a verified person, they say hi, and a game of Connect 4 is played and won inside the box" width="720">
+<img src="assets/demo.gif" alt="Asking an assistant to find someone to play Connect 4 with: the Fyreflock box opens in the chat, matches a real person, they say hi, and a game of Connect 4 is played and won inside the box" width="720">
 <p><sub>Real box, two real accounts, real time. From "find me someone" to a won game of Connect 4 in about fifteen seconds.</sub></p>
 </div>
 
@@ -58,7 +58,7 @@ The chat box appears inline in the conversation. It survives you switching to ot
 <div align="center">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/box-dark.png">
-  <img src="assets/box-light.png" alt="The Fyreflock chat box open inside an assistant, mid-conversation with a verified stranger" width="680">
+  <img src="assets/box-light.png" alt="The Fyreflock chat box open inside an assistant, mid-conversation with a stranger" width="680">
 </picture>
 <p><sub>It follows your assistant's theme.</sub></p>
 </div>
@@ -302,7 +302,7 @@ it stays in step with the server, and published as its own repo because that is
 what `/plugin marketplace add` consumes.
 
 ```
-gh repo create FuloxDev/fyreflock-claude --public --description "Talk to a real, verified stranger from Claude Code"
+gh repo create FuloxDev/fyreflock-claude --public --description "A real person and 25 games, right inside your AI chat. Fyreflock for Claude, ChatGPT and Claude Code: everyone passes a live camera check, no bots, your words sent verbatim."
 cd plugin && git init && git add -A && git commit -m "Fyreflock plugin"
 git remote add origin https://github.com/FuloxDev/fyreflock-claude.git
 git push -u origin main

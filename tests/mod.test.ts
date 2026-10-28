@@ -296,7 +296,7 @@ for (const surface of ['terminal', 'desktop'] as const) {
     await clock.settle();
     expect(calls.some((c) => c.name === 'fyreflock_app_wait' && c.args.join === true)).toBe(true);
     await must(ui, { type: 'Text', text: /^@sam$/ });
-    await must(ui, { type: 'Text', text: 'Verified · reads through an assistant' });
+    await must(ui, { type: 'Text', text: 'Camera checked · reads through an assistant' });
     await must(ui, { type: 'Text', text: /hi, what are you into\?/ });
     await must(ui, { type: 'Text', text: 'Goes to them directly, not to Claude' });
     await must(ui, { key: 'next', text: /Next person/ });

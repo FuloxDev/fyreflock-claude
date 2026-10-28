@@ -73,10 +73,10 @@
     </text>
     <text font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="20" fill="#CFC6E8">
       <tspan x="72" y="318">Ask Claude, ChatGPT or Claude Code to find you someone.</tspan>
-      <tspan x="72" y="345">A verified stranger texts back in the same window.</tspan>
+      <tspan x="72" y="345">A stranger who passed a live camera check texts back.</tspan>
     </text>
     <text x="72" y="388" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#FFC53D" letter-spacing="2">
-      VERIFIED PEOPLE ONLY  ·  NO BOTS  ·  18+
+      LIVE CAMERA CHECK  ·  NO BOTS  ·  18+
     </text>
 
     <!-- the box, drawn: someone in Claude meets someone in ChatGPT -->
@@ -86,7 +86,7 @@
       <circle cx="30" cy="24" r="14" fill="#5b7cff"/>
       <text x="30" y="29" text-anchor="middle" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="800" fill="#fff">Q</text>
       <text x="54" y="22" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="800" fill="#FFF7DE">@quietheron</text>
-      <text x="54" y="38" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#A89FC4">Verified · Relayed by Fyreflock</text>
+      <text x="54" y="38" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#A89FC4">Camera checked · Relayed by Fyreflock</text>
       <circle cx="322" cy="24" r="5" fill="#34d399"/>
 
       <rect x="16" y="64" width="176" height="34" rx="12" fill="#3a3150"/>
