@@ -5,7 +5,8 @@
 <h1>Fyreflock for Claude, ChatGPT and Claude Code</h1>
 
 <p><strong>Ask your assistant to find you someone. A real, verified person texts back in the same window, and you can play Connect 4, Battleship or 23 other games together without leaving the chat.</strong><br>
-Your assistant only carries the words, exactly as you typed them. No bots, ever.</p>
+Your assistant only carries the words, exactly as you typed them. No bots, ever.<br>
+<strong>Early access: everything is free, filters included, and every month four early users win an award.</strong></p>
 
 <p>
 <a href="#claude"><img alt="Works in Claude" src="https://img.shields.io/badge/Claude-add%20connector-D97757?style=for-the-badge&logo=anthropic&logoColor=white"></a>
@@ -16,6 +17,7 @@ Your assistant only carries the words, exactly as you typed them. No bots, ever.
 
 <p>
 <a href="https://fyreflock.com"><img alt="fyreflock.com" src="https://img.shields.io/badge/fyreflock.com-find%20your%20Flock-FF7A72?style=flat-square"></a>
+<a href="https://fyreflock.com/awards"><img alt="Early access: everything free" src="https://img.shields.io/badge/early%20access-everything%20free-34d399?style=flat-square"></a>
 <img alt="Verified humans only" src="https://img.shields.io/badge/people-verified%2C%20no%20bots-FFC53D?style=flat-square">
 <img alt="18 plus" src="https://img.shields.io/badge/age-18%2B-6b5bd2?style=flat-square">
 <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/github/license/FuloxDev/fyreflock-claude?style=flat-square&color=34d399"></a>
@@ -120,7 +122,8 @@ If your client cannot sign in by itself, create a token under **Settings** on fy
 | 🎮 **Play while you talk** | 25 games right inside the box: Connect 4, Battleship, Liar's Dice, Checkers, Reversi, Would You Rather and more. The server referees, so neither player, and neither assistant, can peek at a hidden board or hand. Nobody around? Play the computer while you wait. |
 | 🪺 **Roosts** | Your own circle, invite link only. Read and post in Roosts that let assistants in. |
 | 📹 **Take it to video** | Invite the person you are texting to a video call; it opens in your browser, no token, no new account. |
-| 🧭 **Filters and interests** | Set what you are into and who you want to meet. Paid passes add matching preferences; everything else is free. |
+| 🧭 **Filters and interests** | Set what you are into and who you want to meet. During early access every filter is free too. |
+| 🏆 **Monthly awards** | Every month four early users win an award badge and six months of premium for when paid features launch. [See the awards](https://fyreflock.com/awards). |
 | 🛡️ **The door that opens** | Block, report with the evidence attached, add to your Nest if you both want to talk again. Every exit works the first time. |
 
 ## How it stays honest
@@ -160,7 +163,7 @@ Full detail: <https://fyreflock.com/agents> · Privacy: <https://fyreflock.com/p
 
 **How do I know they replied?** The box shows it live. If you have moved on to another chat, your browser can notify you: turn that on when you connect, or later under Settings on fyreflock.com.
 
-**What does it cost?** Nothing. Paid passes add matching preferences; talking is free.
+**What does it cost?** Nothing. Fyreflock is in early access, so everything is free, filters included. Later, paid passes will add matching preferences; talking stays free.
 </details>
 
 ## The pane: talk without the model in the path
