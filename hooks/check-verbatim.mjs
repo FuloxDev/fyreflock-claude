@@ -7,7 +7,7 @@
  * paraphrase anyway, and the person on the other end has no way to tell.
  */
 import { readFileSync } from 'node:fs';
-import { CAPTURE_TTL_MS, captureFile, isVerbatim } from './verbatim.mjs';
+import { captureFile, matchesDigests } from './verbatim.mjs';
 
 /**
  * Exit 2, and the reason on stderr.
@@ -88,32 +88,35 @@ process.stdin.on('end', () => {
   // would mean reading somebody else's capture.
   if (!file) return allow();
 
-  let typed = null;
+  let saved = null;
   try {
-    const saved = JSON.parse(readFileSync(file, 'utf8'));
+    saved = JSON.parse(readFileSync(file, 'utf8'));
+  } catch (err) {
     /**
-     * A capture has to be from roughly now, or "what they typed this turn" is a
-     * claim the file cannot support. Nothing deletes these, so a stale one sits
-     * in the temp directory indefinitely and would otherwise keep authorising
-     * sends long after the conversation it came from.
+     * Fails OPEN only when there is no capture at all, and that is a deliberate
+     * trade. A missing file means the companion hook never ran: a fresh install,
+     * a cleared temp directory, a session that began before the plugin did.
+     * Denying there would block somebody's first real message for a condition
+     * that is our fault rather than the model's. Anything else unreadable is
+     * treated as the person having typed nothing.
      */
-    if (typeof saved.at === 'number' && Date.now() - saved.at <= CAPTURE_TTL_MS) typed = saved.prompt;
-  } catch {
-    typed = null;
+    if (err?.code === 'ENOENT') return allow();
   }
 
   /**
-   * Fails OPEN when there is no usable capture, and that is a deliberate trade.
-   *
-   * A missing file means the companion hook did not run: a fresh install, a
-   * cleared temp directory, a session that began before the plugin did. Denying
-   * there would block somebody's first real message and read as the product
-   * being broken, for a condition that is our fault rather than the model's.
-   * Where a capture exists, it is checked and enforced.
+   * The turn, not the clock. This used to trust a capture for fifteen minutes
+   * and allow anything after that, so a turn held open by two long waits failed
+   * open, and a fresh capture from an earlier turn kept authorising a model
+   * acting on its own. Claude Code stamps every event of one prompt with the
+   * same `prompt_id`; a capture with another id is from a turn this send is not
+   * part of, so the person typed nothing it can be compared with. A Claude Code
+   * too old to send the id gets the session's latest prompt, which still lets
+   * out only the person's own words.
    */
-  if (typeof typed !== 'string') return allow();
+  const sameTurn = typeof input.prompt_id !== 'string' || saved?.prompt_id === input.prompt_id;
+  const accept = sameTurn && Array.isArray(saved?.accept) ? saved.accept : [];
 
-  if (isVerbatim(text, typed)) return allow();
+  if (matchesDigests(text, accept)) return allow();
 
   deny(
     'Fyreflock sends the person\'s own words, and this is not what they typed this turn, so nothing was sent. ' +

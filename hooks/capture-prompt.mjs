@@ -6,7 +6,7 @@
  * is acceptable to have a hook in the path of everything somebody types.
  */
 import { writeFileSync } from 'node:fs';
-import { captureFile } from './verbatim.mjs';
+import { acceptedDigests, captureFile } from './verbatim.mjs';
 
 let raw = '';
 process.stdin.setEncoding('utf8');
@@ -18,9 +18,18 @@ process.stdin.on('end', () => {
     // No id, nothing to key on. Writing to a shared name would let one session's
     // prompt authorise another session's send.
     if (file) {
-      // 0600: this is a transcript of somebody's own words sitting in a shared
-      // temp directory, and the default there is world readable.
-      writeFileSync(file, JSON.stringify({ prompt: input.prompt ?? '', at: Date.now() }), { encoding: 'utf8', mode: 0o600 });
+      /**
+       * Digests, never the words, and one file per session that each prompt
+       * overwrites. `prompt_id` is what ties it to this turn: Claude Code stamps
+       * every event of one prompt with it, so the check can tell a send from
+       * this turn from one in a turn the person never typed in, however long
+       * either runs. 0600 because the temp directory's default is world readable.
+       */
+      writeFileSync(
+        file,
+        JSON.stringify({ prompt_id: typeof input.prompt_id === 'string' ? input.prompt_id : null, accept: acceptedDigests(input.prompt ?? '') }),
+        { encoding: 'utf8', mode: 0o600 },
+      );
     }
   } catch {
     /**

@@ -163,11 +163,23 @@ async function signedIn($: EngineInterface): Promise<boolean> {
   return Boolean(await $.env.get('FYREFLOCK_TOKEN')) || (await $.store.get(await authKey($))) !== undefined;
 }
 
+/**
+ * The key the server asks the chat box's own tools for, so a model a stranger
+ * talked into calling them is refused. It comes in `fyreflock_open`'s `_meta`,
+ * which no host shows a model. Held per token, because a key is bound to the
+ * account it was minted for; a server that sends none gets none back.
+ */
+const BOX_KEY = 'fyreflock/box_key';
+let box: { token: string; key?: string } | null = null;
+
 /** One `tools/call` over the stateless surface, answered as JSON or as one SSE frame. */
 async function callTool($: EngineInterface, name: string, args: Record<string, unknown>, retry = true): Promise<Record<string, unknown>> {
+  const app = name.startsWith('fyreflock_app_');
+  if (app && box?.token !== (await bearer($))) await callTool($, 'fyreflock_open', {});
   const token = await bearer($);
   if (!token) throw new Error(SIGNED_OUT);
   const url = (await $.env.get('FYREFLOCK_URL')) || DEFAULT_URL;
+  const sent = app && box?.key ? { ...args, box_key: box.key } : args;
   const res = await $.http.fetch(url, {
     method: 'POST',
     headers: {
@@ -175,7 +187,7 @@ async function callTool($: EngineInterface, name: string, args: Record<string, u
       accept: 'application/json, text/event-stream',
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name, arguments: args } }),
+    body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name, arguments: sent } }),
   });
   // The server's clock can end the hour first. An override token has nothing to refresh with, so its 401 stands.
   if (res.status === 401 && retry && !(await $.env.get('FYREFLOCK_TOKEN'))) {
@@ -184,7 +196,7 @@ async function callTool($: EngineInterface, name: string, args: Record<string, u
   }
   const data = res.text.split('\n').filter((l) => l.startsWith('data:')).pop();
   let frame: {
-    result?: { structuredContent?: Record<string, unknown>; isError?: boolean; content?: { text?: string }[] };
+    result?: { structuredContent?: Record<string, unknown>; isError?: boolean; content?: { text?: string }[]; _meta?: Record<string, unknown> };
     error?: { message?: string };
     message?: string;
   };
@@ -198,6 +210,10 @@ async function callTool($: EngineInterface, name: string, args: Record<string, u
   const s = frame.result?.structuredContent ?? {};
   if (s.ok === false) throw new Error(String(s.message ?? s.error ?? 'refused'));
   if (frame.result?.isError) throw new Error(frame.result.content?.[0]?.text ?? 'tool error');
+  if (name === 'fyreflock_open') {
+    const key = frame.result?._meta?.[BOX_KEY];
+    box = { token, key: typeof key === 'string' ? key : undefined };
+  }
   return s;
 }
 
@@ -493,7 +509,7 @@ export const register: Register = (on) => {
       await open($);
       const { phase, link, userCode } = await read($, view);
       // In the transcript too, where the link is clickable even on a surface that seats no pane.
-      if (phase === 'off' && link) return { text: `Sign in to Fyreflock: open ${link}, check the page shows the code ${userCode}, and press Allow. The pane picks it up from there.` };
+      if (phase === 'off' && link) return { text: `Sign in to Fyreflock: open ${link}, type the code ${userCode} on the page, and press Allow. The pane picks it up from there.` };
       return { text: 'Fyreflock pane opened. /fyreflock start finds someone; anything else you give /fyreflock is sent as written.' };
     }
     if (word === 'start') {
@@ -550,9 +566,9 @@ export const register: Register = (on) => {
             <Text wrap="wrap">Open this link, sign in or sign up, and press Allow:</Text>
             {/* No label: the address is the text, so a terminal that cannot open links still lets it be copied. */}
             <Link href={v.link} />
-            {/* The page shows it too: a link forwarded to somebody else arrives with a code their pane never showed. */}
+            {/* Typed, not carried in the link: a forwarded link used to let whoever opened it approve somebody else's pane. */}
             <Box flexDirection="column">
-              <Text wrap="wrap">The page will show this code. Press Allow only if it matches:</Text>
+              <Text wrap="wrap">Type this code on the page, then press Allow:</Text>
               <Text bold>{v.userCode}</Text>
             </Box>
             <Text dimColor>Waiting for you to press Allow…</Text>

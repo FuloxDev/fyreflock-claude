@@ -26,9 +26,6 @@ import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-/** A capture older than this cannot describe the turn being sent. */
-export const CAPTURE_TTL_MS = 15 * 60_000;
-
 /**
  * A per-session file under the OS temp directory, named by a hash of the id.
  *
@@ -131,29 +128,50 @@ export function offeredSpan(prompt) {
 }
 
 /**
- * Is this text the person's message for this turn?
+ * Kind first, so a backtick span can only ever match a send byte for byte and a
+ * normalised message only a normalised send.
+ */
+const digest = (kind, s) => createHash('sha256').update(`${kind}\0${s}`).digest('hex');
+
+/**
+ * What counts as this prompt's message, as digests, so the capture on disk
+ * never holds the words.
  *
  * Three ways to be yes, in order of how precisely the person asked for it:
  * something they wrapped in backticks, byte for byte, which is the escape hatch
  * for anything the rules below would mangle; their whole prompt; or their prompt
  * with one leading "tell them" removed. Anything else is a no, including an
  * excerpt of any of them.
+ *
+ * The capture used to be the prompt itself, in a world-listable temp directory,
+ * for every prompt of every session, forever. Equality is all the check needs,
+ * and a digest answers equality.
  */
-export function isVerbatim(sentText, typedPrompt) {
+export function acceptedDigests(typedPrompt) {
+  const out = [];
+  const span = offeredSpan(typedPrompt);
+  // Byte for byte, deliberately before normalisation: the point of backticks is
+  // that what is inside them is not touched by anything.
+  if (span !== null) out.push(digest('span', span));
+  const typed = normalize(typedPrompt);
+  if (typed.length === 0) return out;
+  out.push(digest('text', unwrap(typed)));
+  const withoutLeadIn = typed.replace(LEAD_IN, '');
+  if (withoutLeadIn !== typed) out.push(digest('text', unwrap(withoutLeadIn.trim())));
+  return out;
+}
+
+export function matchesDigests(sentText, digests) {
   const raw = String(sentText ?? '');
   // Whitespace with nothing in it is not a message, and normalising made it
   // indistinguishable from an empty send, which used to be allowed outright.
   if (raw.trim().length === 0) return false;
-
-  // Byte for byte, deliberately before normalisation: the point of backticks is
-  // that what is inside them is not touched by anything.
-  if (offeredSpan(typedPrompt) === raw) return true;
-
+  if (digests.includes(digest('span', raw))) return true;
   const sent = unwrap(normalize(raw));
-  const typed = normalize(typedPrompt);
-  if (typed.length === 0 || sent.length === 0) return false;
+  return sent.length > 0 && digests.includes(digest('text', sent));
+}
 
-  if (unwrap(typed) === sent) return true;
-  const withoutLeadIn = typed.replace(LEAD_IN, '');
-  return withoutLeadIn !== typed && unwrap(withoutLeadIn.trim()) === sent;
+/** Is this text the person's message for this turn? */
+export function isVerbatim(sentText, typedPrompt) {
+  return matchesDigests(sentText, acceptedDigests(typedPrompt));
 }

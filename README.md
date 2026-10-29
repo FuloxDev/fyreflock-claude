@@ -205,7 +205,10 @@ long-polls `fyreflock_app_wait` on the same `/mcp` endpoint the model's tools
 use, at `FYREFLOCK_URL`, twenty-five seconds a call (the engine cuts a fetch at
 thirty), and sends through `fyreflock_app_say`. Those two are the widget's
 app-only tools; they return the server's own record of the conversation, which
-is why the pane can show receipts the `fyreflock_listen` result cannot. Each
+is why the pane can show receipts the `fyreflock_listen` result cannot. The
+server refuses them to anything but the box and the pane, so the pane first
+calls `fyreflock_open` once and sends the key from its `_meta` (which no host
+shows a model) with each of them. Each
 poll carries `pane: true`: the server reads that as "the pane is live" for
 thirty seconds, and a chat box the same Claude Code mounts (the desktop app's
 Code tab draws MCP Apps) folds to one line pointing here instead of offering a
@@ -259,15 +262,23 @@ and allow `mcp__plugin_fyreflock_fyreflock__*`.
 
 Two, both local, both tiny, neither sends anything anywhere.
 
-**`capture-prompt.mjs`** runs on every prompt you submit and writes it to one
-file in your system temp directory, keyed by a hash of the session id. That is
-the whole job.
+**`capture-prompt.mjs`** runs on every prompt you submit and writes one small
+file in your system temp directory, keyed by a hash of the session id and
+overwritten by your next prompt. It holds SHA-256 digests of the forms your
+message can take and the turn's `prompt_id`, never your words. That is the
+whole job.
 
-**`check-verbatim.mjs`** runs before `fyreflock_say` and `fyreflock_roost_say`
-and refuses the call unless the text being sent is the message you typed this
-turn. Spacing and curly quotes are forgiven. Rewording, correcting, shortening,
-summarising, shouting and inventing are not, and the model is told to send your
-words instead.
+**`check-verbatim.mjs`** runs before `fyreflock_say`, `fyreflock_roost_say`,
+`fyreflock_game_move` and `fyreflock_app_say`, under any server name (the
+plugin's own, a `claude mcp add` one, or the claude.ai connector Claude Code
+imports), and refuses the call unless the text being sent is the message you
+typed this turn. Spacing and curly quotes are forgiven. Rewording, correcting,
+shortening, summarising, shouting and inventing are not, and the model is told
+to send your words instead.
+
+"This turn" is the turn, not a time limit: Claude Code gives every event of one
+prompt the same `prompt_id`, so a long turn keeps your words, and a model
+acting on its own in a turn you did not start has nothing it may send.
 
 It compares by equality, not containment. What goes out has to BE your message,
 not merely appear somewhere inside what you typed: a substring test lets "tell
@@ -277,9 +288,10 @@ types bare lines at an assistant: one leading "tell them" is stripped, and
 anything you wrap in backticks goes byte for byte, punctuation and case
 included. That last one is the escape hatch when the rules get in your way.
 
-If no prompt was captured, it allows the call. A missing capture means this
-plugin did not run, which is our bug, not the model's, and blocking your first
-message over it would just look broken.
+If no capture file exists at all, it allows the call. A missing capture means
+this plugin did not run, which is our bug, not the model's, and blocking your
+first message over it would just look broken. Any other unreadable capture
+counts as you having typed nothing.
 
 Set `FYREFLOCK_ASSIST=1` (or `true`, and nothing else counts) to turn the check
 off, for when you genuinely want Claude to help you write or translate a line.

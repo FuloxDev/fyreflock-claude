@@ -16,7 +16,7 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "^mcp__.*fyreflock.*__fyreflock_(say|roost_say|game_move)$",
+        "matcher": "^mcp__.+__fyreflock_(say|roost_say|game_move|app_say)$",
         "hooks": [
           {
             "type": "command",

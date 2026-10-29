@@ -1,7 +1,7 @@
 {
   "name": "fyreflock",
   "displayName": "Fyreflock",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Talk to a real person who passed a live camera check and play games together, from your terminal. Your words are sent word for word.",
   "author": {
     "name": "FuloxDev",

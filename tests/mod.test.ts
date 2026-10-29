@@ -69,7 +69,7 @@ function server(
         status: 200,
         ok: true,
         headers: { 'content-type': 'text/event-stream' },
-        text: `event: message\ndata: ${JSON.stringify({ jsonrpc: '2.0', id: 1, result: { content: [{ type: 'text', text: 'ok' }], structuredContent } })}\n\n`,
+        text: `event: message\ndata: ${JSON.stringify({ jsonrpc: '2.0', id: 1, result: { content: [{ type: 'text', text: 'ok' }], structuredContent, ...(body.params.name === 'fyreflock_open' ? { _meta: { 'fyreflock/box_key': 'box1' } } : {}) } })}\n\n`,
       },
     };
   });
@@ -146,13 +146,13 @@ for (const surface of ['terminal', 'desktop'] as const) {
 
     // Opening the pane asks for a link at once and shows it with its code: the two are the whole sign-in.
     expect((await $.command.run(typed(''))).text).toBe(
-      `Sign in to Fyreflock: open ${LINK}, check the page shows the code BCDF-GHJK, and press Allow. The pane picks it up from there.`,
+      `Sign in to Fyreflock: open ${LINK}, type the code BCDF-GHJK on the page, and press Allow. The pane picks it up from there.`,
     );
     const ui = await $.ui.mount({ ...PANE, surface });
     expect(posts[0]).toEqual({ path: DEVICE, form: { client_id: 'pane' } });
     expect((await ui.find({ type: 'Link' }))?.props.href).toBe(LINK);
     // The consent page shows the same code, so a link forwarded to somebody else gives itself away.
-    await must(ui, { type: 'Text', text: 'The page will show this code. Press Allow only if it matches:' });
+    await must(ui, { type: 'Text', text: 'Type this code on the page, then press Allow:' });
     expect((await must(ui, { type: 'Text', text: 'BCDF-GHJK' })).props.bold).toBe(true);
     await must(ui, { type: 'Text', text: 'Waiting for you to press Allow…' });
     expect(await ui.find({ key: 'start' })).toBeUndefined();
@@ -285,7 +285,9 @@ for (const surface of ['terminal', 'desktop'] as const) {
     await $.command.run(typed(''));
     await clock.advance(20_000);
     // Every poll says it is the pane: that flag is what folds a chat box in the same Claude Code down to one line.
-    expect(calls[0]).toEqual({ name: 'fyreflock_app_wait', args: { join: false, budget_ms: 25_000, pane: true }, bearer: 'Bearer tok' });
+    // And carries the box key, asked for once through fyreflock_open, whose _meta no model is shown.
+    expect(calls[0]?.name).toBe('fyreflock_open');
+    expect(calls[1]).toEqual({ name: 'fyreflock_app_wait', args: { join: false, budget_ms: 25_000, pane: true, box_key: 'box1' }, bearer: 'Bearer tok' });
     const ui = await $.ui.mount({ ...PANE, surface });
     await must(ui, { type: 'Text', text: 'Find your flock' });
     await must(ui, { type: 'Text', text: '7 by the fire' });
@@ -306,14 +308,14 @@ for (const surface of ['terminal', 'desktop'] as const) {
     await clock.settle();
     const said = calls.find((c) => c.name === 'fyreflock_app_say');
     // Trimmed and nothing else: the field's words are the stranger's words.
-    expect(said?.args).toEqual({ text: 'books, mostly. you?' });
+    expect(said?.args).toEqual({ text: 'books, mostly. you?', box_key: 'box1' });
     await must(ui, { type: 'Text', text: /books, mostly\. you\?/ });
     await must(ui, { type: 'Text', text: /^Sent$/ });
 
     // The slash command sends the rest of its line as written, too.
     const run = await $.command.run(typed('see you at the fire'));
     expect(run.text).toBe('Sent: see you at the fire');
-    expect(calls.filter((c) => c.name === 'fyreflock_app_say').pop()?.args).toEqual({ text: 'see you at the fire' });
+    expect(calls.filter((c) => c.name === 'fyreflock_app_say').pop()?.args).toEqual({ text: 'see you at the fire', box_key: 'box1' });
 
     // Leaving yourself is the ended state in your own words, the lines kept, until you move on.
     await ui.press({ key: 'leave' });
@@ -326,6 +328,7 @@ for (const surface of ['terminal', 'desktop'] as const) {
     // The echoed ending, then the idle answers after it, change nothing.
     await clock.advance(20_000);
     expect(calls.filter((c) => c.name === 'fyreflock_app_wait').length).toBeGreaterThan(2);
+    expect(calls.filter((c) => c.name === 'fyreflock_open')).toHaveLength(1);
     await must(ui, { type: 'Text', text: 'You left the campfire' });
     await ui.unmount();
   });
@@ -463,7 +466,7 @@ test('a video invite is answered in the pane and the call opens in the browser',
 
   await ui.press({ key: 'video-yes' });
   await clock.settle();
-  expect(calls.find((c) => c.name === 'fyreflock_app_video')?.args).toEqual({ answer: 'accept' });
+  expect(calls.find((c) => c.name === 'fyreflock_app_video')?.args).toEqual({ answer: 'accept', box_key: 'box1' });
   await must(ui, { type: 'Text', text: /You both said yes/ });
   // The terminal has no camera: the yes becomes a link to the call, tagged with where it came from.
   const link = await ui.find({ type: 'Link' });
